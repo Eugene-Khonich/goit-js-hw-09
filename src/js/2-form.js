@@ -21,13 +21,19 @@ const onFormInput = ev => {
   const fieldName = ev.target.name;
   const fieldValue = ev.target.value;
 
-  formData[fieldName] = fieldValue;
+  formData[fieldName] = fieldValue.trim();
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+};
+const clearFormData = () => {
+  formData.email = '';
+  formData.message = '';
 };
 const onFormSubmit = ev => {
   if (formData.email && formData.message) {
     ev.preventDefault();
+    console.log(formData);
     ev.target.reset();
+    clearFormData();
     localStorage.removeItem('feedback-form-state');
   } else {
     alert('Fill please all fields');
